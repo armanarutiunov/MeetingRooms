@@ -9,17 +9,7 @@ import Foundation
 
 public final class Datastore {
 
-    // MARK: - Properties
-
-    public static let shared = Datastore()
-
-    // MARK: - Life Cycle
-
-    private init() {}
-
-    // MARK: - Actions
-
-    public func save<T: Codable>(_ object: T, key: String) {
+    public static func save<T: Codable>(_ object: T, key: String) {
         let path = Path<T>().item(key)
         let pathURL = URL(filePath: path)
 
@@ -44,7 +34,7 @@ public final class Datastore {
         }
     }
 
-    public func load<T: Codable>(key: String) -> T? {
+    public static func load<T: Codable>(key: String) -> T? {
         let path = Path<T>().item(key)
 
         guard let data = FileManager.default.contents(atPath: path) else {
@@ -66,7 +56,7 @@ public final class Datastore {
         }
     }
 
-    public func delete<T: Codable>(key: String, type: T.Type) {
+    public static func delete<T: Codable>(key: String, type: T.Type) {
         let path = Path<T>().item(key)
         try? FileManager.default.removeItem(atPath: path)
     }

@@ -32,7 +32,7 @@ public final class RoomManager: RoomManageable {
     private let cloudManager: CloudManageable
 
     public var cachedRooms: [Room]? {
-        Datastore.shared.load(key: DatastoreKey.cachedRooms)
+        Datastore.load(key: DatastoreKey.cachedRooms)
     }
 
     // MARK: - Life Cycle
@@ -45,7 +45,7 @@ public final class RoomManager: RoomManageable {
 
     public func fetchRooms() async throws -> [Room] {
         let response: RoomsResponse = try await cloudManager.request(with: WeTransferEndpoint.rooms)
-        Datastore.shared.save(response.rooms, key: DatastoreKey.cachedRooms)
+        Datastore.save(response.rooms, key: DatastoreKey.cachedRooms)
         return response.rooms
     }
 
