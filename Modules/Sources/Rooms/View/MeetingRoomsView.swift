@@ -14,6 +14,7 @@ public struct MeetingRoomsView: View {
     private enum Constant {
         enum Header {
             static let title = "Rooms"
+            static let spacing = 10.0
             static let subtitle = "Odio nisi, lectus dis nulla. Ultrices maecenas vitae rutrum dolor ultricies donec risus sodales. Tempus quis et."
             static let insets = EdgeInsets(top: 25, leading: 5, bottom: 25, trailing: 5)
         }
@@ -53,7 +54,7 @@ public struct MeetingRoomsView: View {
     }
 
     private var header: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: Constant.Header.spacing) {
             Text(Constant.Header.title)
                 .font(.helvetica(.headline).bold())
                 .foregroundColor(viewModel.titleColor(with: colorScheme))
