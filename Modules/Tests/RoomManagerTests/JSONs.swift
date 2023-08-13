@@ -17,3 +17,7 @@ let RoomJSON: [String: Any] = [
 let RoomsResponseJSON: [String: Any] = [
     "rooms": [RoomJSON]
 ]
+
+let BookRoomResponseJSON: [String: Any] = [
+    BookRoomResponse.CodingKeys.isSuccess.rawValue: true
+]
