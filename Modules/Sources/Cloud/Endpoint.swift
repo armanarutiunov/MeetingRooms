@@ -15,7 +15,7 @@ public protocol Endpoint {
 
 extension Endpoint {
 
-    public var url: URL {
+    var url: URL {
         URL(string: path, relativeTo: baseURL)!
     }
 }
