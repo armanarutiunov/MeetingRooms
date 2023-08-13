@@ -11,7 +11,7 @@ import Utilities
 @MainActor
 public protocol CloudManageable {
 
-    func request<T: Decodable>(with url: URL) async throws -> T
+    func request<T: Decodable>(with endpoint: Endpoint) async throws -> T
 }
 
 public final class CloudManager: CloudManageable {
@@ -26,8 +26,8 @@ public final class CloudManager: CloudManageable {
 
     // MARK: - Actions
 
-    public func request<T: Decodable>(with url: URL) async throws -> T {
-        let (data, _) = try await URLSession.shared.data(from: url)
+    public func request<T: Decodable>(with endpoint: Endpoint) async throws -> T {
+        let (data, _) = try await URLSession.shared.data(from: endpoint.url)
         return try data.decoded()
     }
 }
