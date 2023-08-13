@@ -10,6 +10,7 @@ private let NukeUI = Target.Dependency.product(name: "NukeUI", package: "Nuke")
 // MARK: - Local modules
 
 private let Cloud = Target.Dependency(stringLiteral: "Cloud")
+private let DesignSystem = Target.Dependency(stringLiteral: "DesignSystem")
 private let RoomManager = Target.Dependency(stringLiteral: "RoomManager")
 private let Utilities = Target.Dependency(stringLiteral: "Utilities")
 
@@ -19,7 +20,10 @@ let package = Package(name: "Modules",
 
                       platforms: [.iOS(.v16)],
 
-                      products: [.library(name: "Rooms",
+                      products: [.library(name: "DesignSystem",
+                                          targets: ["DesignSystem"]),
+
+                                 .library(name: "Rooms",
                                           targets: ["Rooms"])],
 
                       dependencies: [.package(url: "https://github.com/kean/Nuke", exact: Version("12.1.5"))],
@@ -27,11 +31,13 @@ let package = Package(name: "Modules",
                       targets: [.target(name: "Cloud",
                                         dependencies: [Utilities]),
 
+                                .target(name: "DesignSystem"),
+
                                 .target(name: "RoomManager",
                                         dependencies: [Cloud]),
 
                                 .target(name: "Rooms",
-                                        dependencies: [NukeUI, RoomManager]),
+                                        dependencies: [DesignSystem, NukeUI, RoomManager]),
 
                                 .target(name: "Utilities"),
         
