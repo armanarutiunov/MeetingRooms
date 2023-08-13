@@ -48,6 +48,6 @@ let package = Package(name: "Modules",
                                 .target(name: "Utilities"),
         
                                 .testTarget(name: "RoomManagerTests",
-                                            dependencies: [Cloud, RoomManager, Utilities]),
+                                            dependencies: [Cloud, Datastore, RoomManager, Utilities]),
     ]
 )
