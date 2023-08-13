@@ -93,7 +93,7 @@ struct RoomRowView: View {
     }
 
     private var button: some View {
-        Button(Constant.Button.title, action: viewModel.onButtonTap)
+        RoundedButton(Constant.Button.title, style: .cherry, action: viewModel.onButtonTap)
     }
 }
 
