@@ -4,6 +4,7 @@
 import PackageDescription
 
 private let Cloud = Target.Dependency(stringLiteral: "Cloud")
+private let RoomManager = Target.Dependency(stringLiteral: "RoomManager")
 private let Utilities = Target.Dependency(stringLiteral: "Utilities")
 
 let package = Package(name: "Modules",
@@ -15,6 +16,9 @@ let package = Package(name: "Modules",
     
                       targets: [.target(name: "Cloud",
                                         dependencies: [Utilities]),
+
+                                .target(name: "RoomManager",
+                                        dependencies: [Cloud]),
 
                                 .target(name: "Utilities"),
         
