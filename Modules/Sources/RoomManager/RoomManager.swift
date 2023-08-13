@@ -34,4 +34,9 @@ public final class RoomManager: RoomManageable {
         // TODO: Save cache every time rooms are fetched
         return response.rooms
     }
+
+    public func book(_ room: Room) async throws -> Bool {
+        let response: BookRoomResponse = try await cloudManager.request(with: WeTransferEndpoint.bookRoom)
+        return response.isSuccess
+    }
 }
