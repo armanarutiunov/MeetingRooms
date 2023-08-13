@@ -94,6 +94,7 @@ struct RoomRowView: View {
 
     private var button: some View {
         RoundedButton(Constant.Button.title, style: .cherry, action: viewModel.onButtonTap)
+            .disabled(viewModel.isButtonDisabled)
     }
 }
 

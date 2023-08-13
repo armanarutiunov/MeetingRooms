@@ -36,6 +36,10 @@ final class RoomRowViewModel: ObservableObject, Identifiable {
         }
     }
 
+    var isButtonDisabled: Bool {
+        room.spotsCount < 1
+    }
+
     var imageURL: URL? {
         room.imageURL
     }
