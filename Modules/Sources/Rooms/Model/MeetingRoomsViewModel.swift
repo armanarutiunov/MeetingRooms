@@ -21,9 +21,37 @@ final class MeetingRoomsViewModel: ObservableObject {
 
     let roomManager: RoomManageable
 
+    @Published private(set) var roomRowViewModels = [RoomRowViewModel]()
+
     // MARK: - Life Cycle
 
     init(roomManager: RoomManageable? = nil) {
         self.roomManager = roomManager ?? RoomManager.shared
+    }
+
+    func onAppear() {
+        Task {
+            await fetchRooms()
+        }
+    }
+
+    // MARK: - Actions
+
+    @Sendable func fetchRooms() async {
+        do {
+            let rooms = try await roomManager.fetchRooms()
+            roomRowViewModels = roomRowViewModels(from: rooms)
+        } catch {
+            // TODO: Handle error
+        }
+    }
+
+    // MARK: - Helpers
+
+    private func roomRowViewModels(from rooms: [Room]) -> [RoomRowViewModel] {
+        rooms
+            .map { room in
+                RoomRowViewModel(room: room)
+            }
     }
 }

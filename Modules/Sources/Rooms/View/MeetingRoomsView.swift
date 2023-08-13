@@ -20,7 +20,16 @@ public struct MeetingRoomsView: View {
     // MARK: - Body
 
     public var body: some View {
-        Text("Hello, World!")
+        List {
+            Section {
+                ForEach(viewModel.roomRowViewModels) { viewModel in
+                    RoomRowView(viewModel: viewModel)
+                }
+            }
+        }
+        .listStyle(.grouped)
+        .refreshable(action: viewModel.fetchRooms)
+        .onAppear(perform: viewModel.onAppear)
     }
 }
 
