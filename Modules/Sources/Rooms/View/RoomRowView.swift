@@ -14,9 +14,13 @@ struct RoomRowView: View {
     // MARK: - Declarations
 
     private enum Constant {
+        static let padding = 25.0
+        static let insets = EdgeInsets(top: 0, leading: padding, bottom: padding, trailing: padding)
+
         enum Card {
             static let placeholderImage = "room-placeholder"
             static let ratio: CGFloat = 3/2
+            static let cornerRadius = 11.0
         }
     }
 
@@ -31,6 +35,8 @@ struct RoomRowView: View {
             image
         }
         .aspectRatio(Constant.Card.ratio, contentMode: .fill)
+        .cornerRadius(Constant.Card.cornerRadius)
+        .padding(Constant.insets)
     }
 
     private var image: some View {
