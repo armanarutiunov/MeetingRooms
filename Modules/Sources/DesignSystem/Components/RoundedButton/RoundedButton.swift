@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RoundedButton: View {
+public struct RoundedButton: View {
 
     // MARK: - Declarations
 
@@ -22,13 +22,13 @@ struct RoundedButton: View {
 
     // MARK: - Life Cycle
 
-    init(_ title: String, action: @escaping () -> Void) {
+    public init(_ title: String, action: @escaping () -> Void) {
         self.viewModel = RoundedButtonViewModel(title: title, action: action)
     }
 
     // MARK: - Body
 
-    var body: some View {
+    public var body: some View {
         Button(action: viewModel.action) {
             Text(viewModel.title)
                 .padding(Constant.insets)
