@@ -1,5 +1,5 @@
 //
-//  Datasource.swift
+//  Datastore.swift
 //  
 //
 //  Created by Arman Arutiunov on 13/08/2023.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-public final class Datasource {
+public final class Datastore {
 
     // MARK: - Properties
 
-    public static let shared = Datasource()
+    public static let shared = Datastore()
 
     // MARK: - Life Cycle
 
