@@ -3,16 +3,22 @@
 
 import PackageDescription
 
+private let Cloud = Target.Dependency(stringLiteral: "Cloud")
+private let Utilities = Target.Dependency(stringLiteral: "Utilities")
+
 let package = Package(name: "Modules",
 
                       platforms: [.iOS(.v16)],
 
-                      products: [.library(name: "Modules",
-                                          targets: ["Modules"])],
+                      products: [.library(name: "Cloud",
+                                          targets: ["Cloud"])],
     
-                      targets: [.target(name: "Modules"),
+                      targets: [.target(name: "Cloud",
+                                        dependencies: [Utilities]),
+
+                                .target(name: "Utilities"),
         
                                 .testTarget(name: "ModulesTests",
-                                            dependencies: ["Modules"]),
+                                            dependencies: [Cloud]),
     ]
 )
