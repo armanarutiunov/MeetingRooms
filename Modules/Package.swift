@@ -11,14 +11,17 @@ let package = Package(name: "Modules",
 
                       platforms: [.iOS(.v16)],
 
-                      products: [.library(name: "Cloud",
-                                          targets: ["Cloud"])],
+                      products: [.library(name: "Rooms",
+                                          targets: ["Rooms"])],
     
                       targets: [.target(name: "Cloud",
                                         dependencies: [Utilities]),
 
                                 .target(name: "RoomManager",
                                         dependencies: [Cloud]),
+
+                                .target(name: "Rooms",
+                                        dependencies: [RoomManager]),
 
                                 .target(name: "Utilities"),
         

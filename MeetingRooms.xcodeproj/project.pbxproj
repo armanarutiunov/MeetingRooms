@@ -8,15 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		C21FA59D2A8913000066E6E9 /* MeetingRoomsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21FA59C2A8913000066E6E9 /* MeetingRoomsApp.swift */; };
-		C21FA59F2A8913000066E6E9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21FA59E2A8913000066E6E9 /* ContentView.swift */; };
 		C21FA5A12A8913020066E6E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C21FA5A02A8913020066E6E9 /* Assets.xcassets */; };
 		C21FA5A42A8913020066E6E9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C21FA5A32A8913020066E6E9 /* Preview Assets.xcassets */; };
+		C2E0BD432A8922AB00435D80 /* Rooms in Frameworks */ = {isa = PBXBuildFile; productRef = C2E0BD422A8922AB00435D80 /* Rooms */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C21FA5992A8913000066E6E9 /* MeetingRooms.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingRooms.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C21FA59C2A8913000066E6E9 /* MeetingRoomsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRoomsApp.swift; sourceTree = "<group>"; };
-		C21FA59E2A8913000066E6E9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C21FA5A02A8913020066E6E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C21FA5A32A8913020066E6E9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C27566EB2A8913A300EEDB4D /* Modules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Modules; sourceTree = "<group>"; };
@@ -27,6 +26,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2E0BD432A8922AB00435D80 /* Rooms in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -39,6 +39,7 @@
 				C21FA59B2A8913000066E6E9 /* MeetingRooms */,
 				C27566EB2A8913A300EEDB4D /* Modules */,
 				C21FA59A2A8913000066E6E9 /* Products */,
+				C2E0BD3F2A891D9600435D80 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,7 +55,6 @@
 			isa = PBXGroup;
 			children = (
 				C21FA59C2A8913000066E6E9 /* MeetingRoomsApp.swift */,
-				C21FA59E2A8913000066E6E9 /* ContentView.swift */,
 				C21FA5A02A8913020066E6E9 /* Assets.xcassets */,
 				C21FA5A22A8913020066E6E9 /* Preview Content */,
 			);
@@ -67,6 +67,13 @@
 				C21FA5A32A8913020066E6E9 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C2E0BD3F2A891D9600435D80 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -85,6 +92,9 @@
 			dependencies = (
 			);
 			name = MeetingRooms;
+			packageProductDependencies = (
+				C2E0BD422A8922AB00435D80 /* Rooms */,
+			);
 			productName = MeetingRooms;
 			productReference = C21FA5992A8913000066E6E9 /* MeetingRooms.app */;
 			productType = "com.apple.product-type.application";
@@ -139,7 +149,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C21FA59F2A8913000066E6E9 /* ContentView.swift in Sources */,
 				C21FA59D2A8913000066E6E9 /* MeetingRoomsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -349,6 +358,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C2E0BD422A8922AB00435D80 /* Rooms */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Rooms;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C21FA5912A8913000066E6E9 /* Project object */;
 }
