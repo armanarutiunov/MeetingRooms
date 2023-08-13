@@ -17,10 +17,19 @@ struct RoomRowView: View {
         static let padding = 25.0
         static let insets = EdgeInsets(top: 0, leading: padding, bottom: padding, trailing: padding)
 
-        enum Card {
+        enum Image {
             static let placeholderImage = "room-placeholder"
             static let ratio: CGFloat = 3/2
             static let cornerRadius = 11.0
+        }
+
+        enum Content {
+            static let spacing = 5.0
+            static let padding = 15.0
+        }
+
+        enum Button {
+            static let title = "Book!"
         }
     }
 
@@ -33,9 +42,16 @@ struct RoomRowView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             image
+
+            HStack(alignment: .bottom) {
+                description
+                Spacer()
+                button
+            }
+            .padding(Constant.Content.padding)
         }
-        .aspectRatio(Constant.Card.ratio, contentMode: .fill)
-        .cornerRadius(Constant.Card.cornerRadius)
+        .aspectRatio(Constant.Image.ratio, contentMode: .fill)
+        .cornerRadius(Constant.Image.cornerRadius)
         .padding(Constant.insets)
     }
 
@@ -44,10 +60,24 @@ struct RoomRowView: View {
             if state.isLoading {
                 Color.gray
             } else {
-                (state.image ?? Image(Constant.Card.placeholderImage))
-                    .cropped(ratio: Constant.Card.ratio)
+                (state.image ?? Image(Constant.Image.placeholderImage))
+                    .cropped(ratio: Constant.Image.ratio)
             }
         }
+    }
+
+    private var description: some View {
+        VStack(alignment: .leading, spacing: Constant.Content.spacing) {
+            Text(viewModel.title)
+
+            if let subtitle = viewModel.subtitle {
+                Text(subtitle)
+            }
+        }
+    }
+
+    private var button: some View {
+        Button(Constant.Button.title, action: viewModel.onButtonTap)
     }
 }
 
@@ -57,7 +87,7 @@ struct RoomRowViewSRoomRowView_Previews: PreviewProvider {
     static var previews: some View {
         List {
             ForEach(0..<3) { _ in
-                RoomRowView(viewModel: .init(room: .mock()))
+                RoomRowView(viewModel: .init(room: .mock(), onButtonTap: {}))
                     .listRowSeparator(.hidden)
                     .listSectionSeparator(.hidden)
                     .listRowBackground(Color.clear)

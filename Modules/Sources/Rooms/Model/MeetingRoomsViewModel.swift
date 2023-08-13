@@ -51,7 +51,9 @@ final class MeetingRoomsViewModel: ObservableObject {
     private func roomRowViewModels(from rooms: [Room]) -> [RoomRowViewModel] {
         rooms
             .map { room in
-                RoomRowViewModel(room: room)
+                RoomRowViewModel(room: room, onButtonTap: {
+                    // TODO: Book room
+                })
             }
     }
 }
