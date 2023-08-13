@@ -16,14 +16,18 @@ public struct RoundedButton: View {
         static let cornerRadius = 4.0
     }
 
+    public enum Style {
+        case cherry
+    }
+
     // MARK: - Properties
 
     private let viewModel: RoundedButtonViewModel
 
     // MARK: - Life Cycle
 
-    public init(_ title: String, action: @escaping () -> Void) {
-        self.viewModel = RoundedButtonViewModel(title: title, action: action)
+    public init(_ title: String, style: Style, action: @escaping () -> Void) {
+        self.viewModel = RoundedButtonViewModel(title: title, style: style, action: action)
     }
 
     // MARK: - Body
@@ -33,8 +37,8 @@ public struct RoundedButton: View {
             Text(viewModel.title)
                 .padding(Constant.insets)
                 .font(.helvetica(.buttonTitle))
-                .background(Color.cherry)
-                .foregroundColor(.white)
+                .background(viewModel.backgroundColor)
+                .foregroundColor(viewModel.foregroundColor)
                 .cornerRadius(Constant.cornerRadius)
         }
         .buttonStyle(.plain)
@@ -46,6 +50,6 @@ public struct RoundedButton: View {
 struct RoundedButton_Previews: PreviewProvider {
 
     static var previews: some View {
-        RoundedButton("Book!", action: {})
+        RoundedButton("Book!", style: .cherry, action: {})
     }
 }
