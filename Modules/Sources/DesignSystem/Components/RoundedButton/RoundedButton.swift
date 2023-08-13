@@ -33,7 +33,7 @@ struct RoundedButton: View {
             Text(viewModel.title)
                 .padding(Constant.insets)
                 .font(.helvetica(.buttonTitle))
-                .background(Color.purple)
+                .background(Color.cherry)
                 .foregroundColor(.white)
                 .cornerRadius(Constant.cornerRadius)
         }
