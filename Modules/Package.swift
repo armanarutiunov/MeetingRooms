@@ -21,7 +21,10 @@ let package = Package(name: "Modules",
 
                       platforms: [.iOS(.v16)],
 
-                      products: [.library(name: "DesignSystem",
+                      products: [.library(name: "Cloud",
+                                          targets: ["Cloud"]),
+
+                                 .library(name: "DesignSystem",
                                           targets: ["DesignSystem"]),
 
                                  .library(name: "Rooms",
