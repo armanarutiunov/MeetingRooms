@@ -31,6 +31,13 @@ struct RoundedButtonViewModel {
         }
     }
 
+    var font: Font {
+        switch style {
+        case .cherry:
+            return .helvetica(.buttonTitle).bold()
+        }
+    }
+
     // MARK: - Life Cycle
 
     init(title: String, style: RoundedButton.Style, action: @escaping () -> Void) {
