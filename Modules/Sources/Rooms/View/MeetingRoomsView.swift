@@ -9,9 +9,21 @@ import SwiftUI
 
 public struct MeetingRoomsView: View {
 
+    // MARK: - Declarations
+
+    private enum Constant {
+        enum Header {
+            static let title = "Rooms"
+            static let subtitle = "Odio nisi, lectus dis nulla. Ultrices maecenas vitae rutrum dolor ultricies donec risus sodales. Tempus quis et."
+            static let insets = EdgeInsets(top: 25, leading: 5, bottom: 25, trailing: 5)
+        }
+    }
+
     // MARK: - Properties
 
     @StateObject private var viewModel = MeetingRoomsViewModel()
+
+    @Environment(\.colorScheme) private var colorScheme
 
     // MARK: - Life Cycle
 
@@ -24,12 +36,32 @@ public struct MeetingRoomsView: View {
             Section {
                 ForEach(viewModel.roomRowViewModels) { viewModel in
                     RoomRowView(viewModel: viewModel)
+                        .listRowSeparator(.hidden)
+                        .listRowBackground(Color.clear)
+                        .listRowInsets(EdgeInsets())
                 }
+            } header: {
+                header
             }
+            .listSectionSeparator(.hidden)
         }
         .listStyle(.grouped)
         .refreshable(action: viewModel.fetchRooms)
         .onAppear(perform: viewModel.onAppear)
+    }
+
+    private var header: some View {
+        VStack(alignment: .leading) {
+            Text(Constant.Header.title)
+                .font(.helvetica(.headline).bold())
+                .foregroundColor(viewModel.titleColor(with: colorScheme))
+
+            Text(Constant.Header.subtitle)
+                .font(.helvetica(.subheadline))
+                .foregroundColor(.gray)
+        }
+        .textCase(.none)
+        .padding(Constant.Header.insets)
     }
 }
 

@@ -46,6 +46,19 @@ final class MeetingRoomsViewModel: ObservableObject {
         }
     }
 
+    func titleColor(with colorScheme: ColorScheme) -> Color {
+        switch colorScheme {
+        case .light:
+            return .black
+
+        case .dark:
+            return .white
+
+        @unknown default:
+            return .black
+        }
+    }
+
     // MARK: - Helpers
 
     private func roomRowViewModels(from rooms: [Room]) -> [RoomRowViewModel] {
