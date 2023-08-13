@@ -70,6 +70,8 @@ struct RoomRowView: View {
                     .cropped(ratio: Constant.Image.ratio)
             }
         }
+        .accessibilityLabel(viewModel.a11yImageLabel)
+        .accessibilityHint(viewModel.a11yImageHint)
     }
 
     private var gradient: some View {
@@ -90,11 +92,13 @@ struct RoomRowView: View {
                     .foregroundColor(.gray)
             }
         }
+        .accessibilityHidden(true)
     }
 
     private var button: some View {
         RoundedButton(Constant.Button.title, style: .cherry, action: viewModel.onButtonTap)
             .disabled(viewModel.isButtonDisabled)
+            .accessibilityHint(viewModel.a11yButtonHint)
     }
 }
 

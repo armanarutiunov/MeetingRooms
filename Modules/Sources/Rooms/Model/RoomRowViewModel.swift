@@ -44,6 +44,18 @@ final class RoomRowViewModel: ObservableObject, Identifiable {
         room.imageURL
     }
 
+    var a11yImageLabel: String {
+        "Room \(room.name)"
+    }
+
+    var a11yImageHint: String {
+        subtitle ?? ""
+    }
+
+    var a11yButtonHint: String {
+        "Lets you book room \(room.name)"
+    }
+
     // MARK: - Life Cycle
 
     init(room: Room, onButtonTap: @escaping () -> Void) {
