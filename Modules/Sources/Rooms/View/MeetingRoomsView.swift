@@ -17,6 +17,10 @@ public struct MeetingRoomsView: View {
             static let subtitle = "Odio nisi, lectus dis nulla. Ultrices maecenas vitae rutrum dolor ultricies donec risus sodales. Tempus quis et."
             static let insets = EdgeInsets(top: 25, leading: 5, bottom: 25, trailing: 5)
         }
+
+        enum Alert {
+            static let buttonTitle = "OK"
+        }
     }
 
     // MARK: - Properties
@@ -43,6 +47,9 @@ public struct MeetingRoomsView: View {
         .listStyle(.grouped)
         .refreshable(action: viewModel.fetchRooms)
         .onAppear(perform: viewModel.onAppear)
+        .alert(viewModel.alertTitle, isPresented: $viewModel.isAlertPresented) {
+            Button(Constant.Alert.buttonTitle) {}
+        }
     }
 
     private var header: some View {
