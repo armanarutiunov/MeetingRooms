@@ -16,6 +16,7 @@ struct RoomRowView: View {
     private enum Constant {
         enum Card {
             static let placeholderImage = "room-placeholder"
+            static let ratio: CGFloat = 3/2
         }
     }
 
@@ -29,6 +30,7 @@ struct RoomRowView: View {
         ZStack(alignment: .bottom) {
             image
         }
+        .aspectRatio(Constant.Card.ratio, contentMode: .fill)
     }
 
     private var image: some View {
@@ -36,7 +38,8 @@ struct RoomRowView: View {
             if state.isLoading {
                 Color.gray
             } else {
-                state.image ?? Image(Constant.Card.placeholderImage)
+                (state.image ?? Image(Constant.Card.placeholderImage))
+                    .cropped(ratio: Constant.Card.ratio)
             }
         }
     }
