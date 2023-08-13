@@ -27,7 +27,7 @@ struct RoundedButtonViewModel {
     var foregroundColor: Color {
         switch style {
         case .cherry:
-            return .cherry
+            return .white
         }
     }
 
