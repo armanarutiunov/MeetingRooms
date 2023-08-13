@@ -5,10 +5,19 @@
 //  Created by Arman Arutiunov on 13/08/2023.
 //
 
+import DesignSystem
 import NukeUI
 import SwiftUI
 
 struct RoomRowView: View {
+
+    // MARK: - Declarations
+
+    private enum Constant {
+        enum Card {
+            static let placeholderImage = "room-placeholder"
+        }
+    }
 
     // MARK: - Properties
 
@@ -27,7 +36,7 @@ struct RoomRowView: View {
             if state.isLoading {
                 Color.gray
             } else {
-                state.image
+                state.image ?? Image(Constant.Card.placeholderImage)
             }
         }
     }
