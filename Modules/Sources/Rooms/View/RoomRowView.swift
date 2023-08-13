@@ -81,7 +81,7 @@ struct RoomRowView: View {
     private var description: some View {
         VStack(alignment: .leading, spacing: Constant.Content.spacing) {
             Text(viewModel.title)
-                .font(.helvetica(.description))
+                .font(.helvetica(.description).bold())
                 .foregroundColor(.white)
 
             if let subtitle = viewModel.subtitle {
