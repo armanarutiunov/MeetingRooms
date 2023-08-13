@@ -3,11 +3,17 @@
 
 import PackageDescription
 
+// MARK: - Remote dependencies
+
 private let NukeUI = Target.Dependency.product(name: "NukeUI", package: "Nuke")
+
+// MARK: - Local modules
 
 private let Cloud = Target.Dependency(stringLiteral: "Cloud")
 private let RoomManager = Target.Dependency(stringLiteral: "RoomManager")
 private let Utilities = Target.Dependency(stringLiteral: "Utilities")
+
+// MARK: - Package
 
 let package = Package(name: "Modules",
 
