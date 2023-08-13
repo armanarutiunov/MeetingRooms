@@ -68,7 +68,13 @@ final class MeetingRoomsViewModel: ObservableObject {
             let rooms = try await roomManager.fetchRooms()
             roomRowViewModels = roomRowViewModels(from: rooms)
         } catch {
-            alertType = .error(error as NSError)
+            if error.isConnectionFailure,
+               roomRowViewModels.isEmpty,
+               let cachedRooms = roomManager.cachedRooms {
+                roomRowViewModels = roomRowViewModels(from: cachedRooms)
+            } else {
+                alertType = .error(error as NSError)
+            }
         }
     }
 
