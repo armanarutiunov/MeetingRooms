@@ -42,7 +42,9 @@ struct RoundedButton: View {
     }
 }
 
+// MARK: - Previews
 struct RoundedButton_Previews: PreviewProvider {
+
     static var previews: some View {
         RoundedButton("Book!", action: {})
     }
