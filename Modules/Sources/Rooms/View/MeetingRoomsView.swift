@@ -55,6 +55,7 @@ public struct MeetingRoomsView: View {
             Text(Constant.Header.title)
                 .font(.helvetica(.headline).bold())
                 .foregroundColor(viewModel.titleColor(with: colorScheme))
+                .accessibilityAddTraits(.isHeader)
 
             Text(Constant.Header.subtitle)
                 .font(.helvetica(.subheadline))
