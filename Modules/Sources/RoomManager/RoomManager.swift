@@ -11,6 +11,7 @@ import Cloud
 public protocol RoomManageable {
 
     func fetchRooms() async throws -> [Room]
+    func book(_ room: Room) async throws -> Bool
 }
 
 public final class RoomManager: RoomManageable {
