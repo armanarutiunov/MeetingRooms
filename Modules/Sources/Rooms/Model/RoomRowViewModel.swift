@@ -53,7 +53,7 @@ final class RoomRowViewModel: ObservableObject, Identifiable {
     }
 
     var a11yButtonHint: String {
-        "Lets you book room \(room.name)"
+        isButtonDisabled ? "Disabled" : "Lets you book room \(room.name)"
     }
 
     // MARK: - Life Cycle
