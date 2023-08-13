@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Room: Identifiable, Decodable {
+public struct Room: Identifiable, Codable {
 
     // MARK: - Declarations
 
