@@ -23,6 +23,11 @@ struct RoomRowView: View {
             static let cornerRadius = 11.0
         }
 
+        enum GradientStops {
+            static let first = Gradient.Stop(color: .clear, location: 0.3)
+            static let last = Gradient.Stop(color: .black.opacity(0.8), location: 1)
+        }
+
         enum Content {
             static let spacing = 5.0
             static let padding = 15.0
@@ -42,6 +47,7 @@ struct RoomRowView: View {
     var body: some View {
         ZStack(alignment: .bottom) {
             image
+            gradient
 
             HStack(alignment: .bottom) {
                 description
@@ -64,6 +70,12 @@ struct RoomRowView: View {
                     .cropped(ratio: Constant.Image.ratio)
             }
         }
+    }
+
+    private var gradient: some View {
+        LinearGradient(stops: [Constant.GradientStops.first, Constant.GradientStops.last],
+                       startPoint: .top,
+                       endPoint: .bottom)
     }
 
     private var description: some View {
