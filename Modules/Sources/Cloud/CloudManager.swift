@@ -16,6 +16,12 @@ public protocol CloudManageable {
 
 public final class CloudManager: CloudManageable {
 
+    // MARK: - Declarations
+
+    private enum Constant {
+        static let timeoutInterval = 10.0
+    }
+
     // MARK: - Properties
 
     public static let shared = CloudManager()
@@ -27,7 +33,10 @@ public final class CloudManager: CloudManageable {
     // MARK: - Actions
 
     public func request<T: Decodable>(with endpoint: Endpoint) async throws -> T {
-        let (data, _) = try await URLSession.shared.data(from: endpoint.url)
+        let urlRequest = URLRequest(url: endpoint.url,
+                                    cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
+                                    timeoutInterval: Constant.timeoutInterval)
+        let (data, _) = try await URLSession.shared.data(for: urlRequest)
         return try data.decoded()
     }
 }
