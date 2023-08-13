@@ -48,3 +48,15 @@ extension Room: Hashable {
         hasher.combine(imageURL)
     }
 }
+
+// MARK: - Mock
+extension Room {
+
+    public static func mock(name: String = "Ljerka",
+                            spotsCount: Int = 43,
+                            imageURL: URL? = nil) -> Room {
+        Room(name: name,
+             spotsCount: spotsCount,
+             imageURL: imageURL)
+    }
+}
