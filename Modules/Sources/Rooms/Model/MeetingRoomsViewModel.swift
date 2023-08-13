@@ -5,6 +5,8 @@
 //  Created by Arman Arutiunov on 13/08/2023.
 //
 
+import Combine
+import Cloud
 import RoomManager
 import SwiftUI
 
@@ -32,6 +34,8 @@ final class MeetingRoomsViewModel: ObservableObject {
     }
 
     @Published var isAlertPresented = false
+
+    private var cancellables = Set<AnyCancellable>()
 
     var alertTitle: String {
         switch alertType {
@@ -68,13 +72,23 @@ final class MeetingRoomsViewModel: ObservableObject {
             let rooms = try await roomManager.fetchRooms()
             roomRowViewModels = roomRowViewModels(from: rooms)
         } catch {
-            if error.isConnectionFailure,
-               roomRowViewModels.isEmpty,
-               let cachedRooms = roomManager.cachedRooms {
-                roomRowViewModels = roomRowViewModels(from: cachedRooms)
-            } else {
-                alertType = .error(error as NSError)
-            }
+            handleRoomsFetchError(error)
+        }
+    }
+
+    private func handleRoomsFetchError(_ error: Error) {
+        guard error.isConnectionFailure else {
+            alertType = .error(error as NSError)
+            return
+        }
+
+        monitorReconnection()
+
+        if let cachedRooms = roomManager.cachedRooms,
+           !cachedRooms.isEmpty {
+            roomRowViewModels = roomRowViewModels(from: cachedRooms)
+        } else {
+            alertType = .error(error as NSError)
         }
     }
 
@@ -88,9 +102,24 @@ final class MeetingRoomsViewModel: ObservableObject {
                 let isSuccess = try await roomManager.book(room)
                 alertType = isSuccess ? .roomBooked(room) : .roomUnavailable(room)
             } catch {
+                if error.isConnectionFailure {
+                    monitorReconnection()
+                }
+
                 alertType = .error(error as NSError)
             }
         }
+    }
+
+    private func monitorReconnection() {
+        NetworkMonitor.shared.$isConnected
+            .first(where: { $0 == true })
+            .sink { [weak self] _ in
+                Task {
+                    await self?.fetchRooms()
+                }
+            }
+            .store(in: &cancellables)
     }
 
     func titleColor(with colorScheme: ColorScheme) -> Color {

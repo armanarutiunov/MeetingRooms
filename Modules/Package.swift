@@ -43,7 +43,7 @@ let package = Package(name: "Modules",
                                         dependencies: [Cloud, Datasource]),
 
                                 .target(name: "Rooms",
-                                        dependencies: [DesignSystem, NukeUI, RoomManager, Utilities]),
+                                        dependencies: [DesignSystem, Cloud, NukeUI, RoomManager, Utilities]),
 
                                 .target(name: "Utilities"),
         
