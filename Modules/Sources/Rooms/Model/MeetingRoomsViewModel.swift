@@ -103,11 +103,10 @@ final class MeetingRoomsViewModel: ObservableObject {
     // MARK: - Helpers
 
     private func roomRowViewModels(from rooms: [Room]) -> [RoomRowViewModel] {
-        rooms
-            .map { room in
-                RoomRowViewModel(room: room, onButtonTap: { [weak self] in
-                    self?.book(room)
-                })
-            }
+        rooms.map { room in
+            RoomRowViewModel(room: room, onButtonTap: { [weak self] in
+                self?.book(room)
+            })
+        }
     }
 }
