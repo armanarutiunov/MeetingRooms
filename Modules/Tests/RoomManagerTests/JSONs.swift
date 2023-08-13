@@ -13,3 +13,7 @@ let RoomJSON: [String: Any] = [
     Room.CodingKeys.spotsCount.rawValue: 43,
     Room.CodingKeys.imageURL.rawValue: "https://image.com"
 ]
+
+let RoomsResponseJSON: [String: Any] = [
+    "rooms": [RoomJSON]
+]
