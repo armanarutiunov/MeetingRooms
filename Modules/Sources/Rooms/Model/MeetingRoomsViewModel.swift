@@ -14,6 +14,8 @@ final class MeetingRoomsViewModel: ObservableObject {
     // MARK: - Declarations
 
     private enum AlertType {
+        case roomBooked(Room)
+        case roomUnavailable(Room)
         case error(NSError)
     }
 
@@ -23,6 +25,30 @@ final class MeetingRoomsViewModel: ObservableObject {
 
     @Published private(set) var roomRowViewModels = [RoomRowViewModel]()
 
+    @Published private var alertType: AlertType? {
+        didSet {
+            isAlertPresented = alertType != nil
+        }
+    }
+
+    @Published var isAlertPresented = false
+
+    var alertTitle: String {
+        switch alertType {
+        case .roomBooked(let room):
+            return "Room \(room.name) is successfully booked"
+
+        case .roomUnavailable(let room):
+            return "Unfortunately, room \(room.name) is no longer available"
+
+        case .error(let error):
+            return error.localizedDescription
+
+        case .none:
+            return ""
+        }
+    }
+
     // MARK: - Life Cycle
 
     init(roomManager: RoomManageable? = nil) {
@@ -30,8 +56,8 @@ final class MeetingRoomsViewModel: ObservableObject {
     }
 
     func onAppear() {
-        Task {
-            await fetchRooms()
+        Task { [weak self] in
+            await self?.fetchRooms()
         }
     }
 
@@ -42,7 +68,22 @@ final class MeetingRoomsViewModel: ObservableObject {
             let rooms = try await roomManager.fetchRooms()
             roomRowViewModels = roomRowViewModels(from: rooms)
         } catch {
-            // TODO: Handle error
+            alertType = .error(error as NSError)
+        }
+    }
+
+    private func book(_ room: Room) {
+        Task { [weak self] in
+            guard let self else {
+                return
+            }
+
+            do {
+                let isSuccess = try await roomManager.book(room)
+                alertType = isSuccess ? .roomBooked(room) : .roomUnavailable(room)
+            } catch {
+                alertType = .error(error as NSError)
+            }
         }
     }
 
@@ -64,8 +105,8 @@ final class MeetingRoomsViewModel: ObservableObject {
     private func roomRowViewModels(from rooms: [Room]) -> [RoomRowViewModel] {
         rooms
             .map { room in
-                RoomRowViewModel(room: room, onButtonTap: {
-                    // TODO: Book room
+                RoomRowViewModel(room: room, onButtonTap: { [weak self] in
+                    self?.book(room)
                 })
             }
     }
