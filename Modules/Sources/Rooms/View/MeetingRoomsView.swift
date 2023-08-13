@@ -34,12 +34,7 @@ public struct MeetingRoomsView: View {
     public var body: some View {
         List {
             Section {
-                ForEach(viewModel.roomRowViewModels) { viewModel in
-                    RoomRowView(viewModel: viewModel)
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(Color.clear)
-                        .listRowInsets(EdgeInsets())
-                }
+                sectionContent
             } header: {
                 header
             }
@@ -63,6 +58,15 @@ public struct MeetingRoomsView: View {
         }
         .textCase(.none)
         .padding(Constant.Header.insets)
+    }
+
+    private var sectionContent: some View {
+        ForEach(viewModel.roomRowViewModels) { viewModel in
+            RoomRowView(viewModel: viewModel)
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets())
+        }
     }
 }
 
