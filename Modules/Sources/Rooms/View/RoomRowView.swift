@@ -21,6 +21,7 @@ struct RoomRowView: View {
             static let placeholderImage = "room-placeholder"
             static let ratio: CGFloat = 3/2
             static let cornerRadius = 11.0
+            static let accessibilitySortPriority = 100.0
         }
 
         enum GradientStops {
@@ -72,6 +73,8 @@ struct RoomRowView: View {
         }
         .accessibilityLabel(viewModel.a11yImageLabel)
         .accessibilityHint(viewModel.a11yImageHint)
+        .accessibilityRemoveTraits(.isImage)
+        .accessibilitySortPriority(Constant.Image.accessibilitySortPriority)
     }
 
     private var gradient: some View {
