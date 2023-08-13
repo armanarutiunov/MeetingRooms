@@ -9,6 +9,8 @@ import Foundation
 
 public final class Datastore {
 
+    // MARK: - Save
+
     public static func save<T: Codable>(_ object: T, key: String) {
         let path = Path<T>().item(key)
         let pathURL = URL(filePath: path)
@@ -34,6 +36,8 @@ public final class Datastore {
         }
     }
 
+    // MARK: - Load
+
     public static func load<T: Codable>(key: String) -> T? {
         let path = Path<T>().item(key)
 
@@ -56,8 +60,15 @@ public final class Datastore {
         }
     }
 
+    // MARK: - Delete
+
     public static func delete<T: Codable>(key: String, type: T.Type) {
         let path = Path<T>().item(key)
+        try? FileManager.default.removeItem(atPath: path)
+    }
+
+    public static func deleteAll<T: Codable>(of type: T.Type) {
+        let path = Path<T>().folderPath
         try? FileManager.default.removeItem(atPath: path)
     }
 }
