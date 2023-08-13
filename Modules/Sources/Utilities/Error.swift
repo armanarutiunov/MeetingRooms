@@ -21,4 +21,8 @@ extension Error {
     public var isConnectionFailure: Bool {
         NSURLErrorConnectionFailureCodes.contains(_code)
     }
+
+    public static var unknown: NSError {
+        NSError(domain: "com.wetransfer.wetransfer-error", code: 1)
+    }
 }
