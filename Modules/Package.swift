@@ -13,6 +13,7 @@ private let Cloud = Target.Dependency(stringLiteral: "Cloud")
 private let Datastore = Target.Dependency(stringLiteral: "Datastore")
 private let DesignSystem = Target.Dependency(stringLiteral: "DesignSystem")
 private let RoomManager = Target.Dependency(stringLiteral: "RoomManager")
+private let Rooms = Target.Dependency(stringLiteral: "Rooms")
 private let Utilities = Target.Dependency(stringLiteral: "Utilities")
 
 // MARK: - Package
@@ -43,11 +44,14 @@ let package = Package(name: "Modules",
                                         dependencies: [Cloud, Datastore]),
 
                                 .target(name: "Rooms",
-                                        dependencies: [DesignSystem, Cloud, NukeUI, RoomManager, Utilities]),
+                                        dependencies: [Cloud, DesignSystem, NukeUI, RoomManager, Utilities]),
 
                                 .target(name: "Utilities"),
         
                                 .testTarget(name: "RoomManagerTests",
                                             dependencies: [Cloud, Datastore, RoomManager, Utilities]),
+
+                                .testTarget(name: "RoomsTests",
+                                            dependencies: [RoomManager, Rooms])
     ]
 )
