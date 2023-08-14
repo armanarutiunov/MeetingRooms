@@ -92,22 +92,16 @@ final class MeetingRoomsViewModel: ObservableObject {
         }
     }
 
-    private func book(_ room: Room) {
-        Task { [weak self] in
-            guard let self else {
-                return
+    func book(_ room: Room) async {
+        do {
+            let isSuccess = try await roomManager.book(room)
+            alertType = isSuccess ? .roomBooked(room) : .roomUnavailable(room)
+        } catch {
+            if error.isConnectionFailure {
+                monitorReconnection()
             }
 
-            do {
-                let isSuccess = try await roomManager.book(room)
-                alertType = isSuccess ? .roomBooked(room) : .roomUnavailable(room)
-            } catch {
-                if error.isConnectionFailure {
-                    monitorReconnection()
-                }
-
-                alertType = .error(error as NSError)
-            }
+            alertType = .error(error as NSError)
         }
     }
 
@@ -139,8 +133,10 @@ final class MeetingRoomsViewModel: ObservableObject {
 
     private func roomRowViewModels(from rooms: [Room]) -> [RoomRowViewModel] {
         rooms.map { room in
-            RoomRowViewModel(room: room, onButtonTap: { [weak self] in
-                self?.book(room)
+            RoomRowViewModel(room: room, onButtonTap: {
+                Task { [weak self] in
+                    await self?.book(room)
+                }
             })
         }
     }
