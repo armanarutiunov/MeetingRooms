@@ -22,7 +22,7 @@ public final class RoomManager: RoomManageable {
     // MARK: - Declarations
 
     private enum DatastoreKey {
-        static let cachedRooms = "BookingManager.cachedRooms"
+        static let cachedRooms = "RoomManager.cachedRooms"
     }
 
     // MARK: - Properties
