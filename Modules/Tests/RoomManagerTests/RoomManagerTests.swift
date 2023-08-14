@@ -16,10 +16,10 @@ final class RoomManagerTests: XCTestCase {
 
     // MARK: - Life Cycle
 
-    override func setUp() {
-        super.setUp()
-
+    override func tearDown() {
         Datastore.deleteAll(of: [Room].self)
+
+        super.tearDown()
     }
 
     // MARK: - Test
