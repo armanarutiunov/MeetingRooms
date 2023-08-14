@@ -47,6 +47,9 @@ let package = Package(name: "Modules",
                                         dependencies: [Cloud, DesignSystem, NukeUI, RoomManager, Utilities]),
 
                                 .target(name: "Utilities"),
+
+                                .testTarget(name: "DatastoreTests",
+                                            dependencies: [Datastore]),
         
                                 .testTarget(name: "RoomManagerTests",
                                             dependencies: [Cloud, Datastore, RoomManager, Utilities]),
