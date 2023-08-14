@@ -25,4 +25,8 @@ extension Error {
     public static var unknown: NSError {
         NSError(domain: "com.wetransfer.wetransfer-error", code: 1)
     }
+
+    public static var connection: NSError {
+        NSError(domain: "com.wetransfer.wetransfer-error", code: NSURLErrorNotConnectedToInternet, userInfo: [NSLocalizedDescriptionKey: "No Internet"])
+    }
 }
