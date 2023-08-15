@@ -10,8 +10,10 @@ private let NukeUI = Target.Dependency.product(name: "NukeUI", package: "Nuke")
 // MARK: - Local modules
 
 private let Cloud = Target.Dependency(stringLiteral: "Cloud")
+private let Datastore = Target.Dependency(stringLiteral: "Datastore")
 private let DesignSystem = Target.Dependency(stringLiteral: "DesignSystem")
 private let RoomManager = Target.Dependency(stringLiteral: "RoomManager")
+private let Rooms = Target.Dependency(stringLiteral: "Rooms")
 private let Utilities = Target.Dependency(stringLiteral: "Utilities")
 
 // MARK: - Package
@@ -20,7 +22,10 @@ let package = Package(name: "Modules",
 
                       platforms: [.iOS(.v16)],
 
-                      products: [.library(name: "DesignSystem",
+                      products: [.library(name: "Cloud",
+                                          targets: ["Cloud"]),
+
+                                 .library(name: "DesignSystem",
                                           targets: ["DesignSystem"]),
 
                                  .library(name: "Rooms",
@@ -31,17 +36,25 @@ let package = Package(name: "Modules",
                       targets: [.target(name: "Cloud",
                                         dependencies: [Utilities]),
 
+                                .target(name: "Datastore"),
+
                                 .target(name: "DesignSystem"),
 
                                 .target(name: "RoomManager",
-                                        dependencies: [Cloud]),
+                                        dependencies: [Cloud, Datastore]),
 
                                 .target(name: "Rooms",
-                                        dependencies: [DesignSystem, NukeUI, RoomManager]),
+                                        dependencies: [Cloud, DesignSystem, NukeUI, RoomManager, Utilities]),
 
                                 .target(name: "Utilities"),
+
+                                .testTarget(name: "DatastoreTests",
+                                            dependencies: [Datastore]),
         
-                                .testTarget(name: "ModulesTests",
-                                            dependencies: [Cloud]),
+                                .testTarget(name: "RoomManagerTests",
+                                            dependencies: [Cloud, Datastore, RoomManager, Utilities]),
+
+                                .testTarget(name: "RoomsTests",
+                                            dependencies: [RoomManager, Rooms])
     ]
 )

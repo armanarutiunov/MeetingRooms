@@ -64,3 +64,10 @@ final class RoomRowViewModel: ObservableObject, Identifiable {
         self.onButtonTap = onButtonTap
     }
 }
+
+extension RoomRowViewModel: Equatable {
+
+    static func == (lhs: RoomRowViewModel, rhs: RoomRowViewModel) -> Bool {
+        lhs.id == rhs.id
+    }
+}
